@@ -26,13 +26,51 @@
         .inputcol{
             width: 300px;
         }
+        .listbtn{
+            border-radius: 5px;
+            
+        }
     </style>
 </head>
 <body>
+  <script>
+    $( document ).ready(function(event) {
+        console.log( "ready!" );
+        
+    });  
+        
+    async function subFunc(){
+        event.preventDefault();
+        console.log('i am clicked')
+        const burgerName = document.querySelector('#name').value;
+        console.log(burgerName);  
+        let apiResult 
+        apiResult = $.post('api/result', burgerName);
+        console.log(apiResult);
+        apiResult = $.get('api/result/:')
+        $("#list").append(
+            `<li class="list mt-2">${burgerName}<span class="pl-4"><button class="listbtn"> Devour it</button></span></li>`
+        )
+        
+        
+};
+    
+  </script>  
   <div class="row mt-4 justify-content-center">
       <div class="col-4">
           <img class="imgburger" src="https://www.svgrepo.com/show/169724/burger.svg" alt="">
       </div>
+  </div>
+  <div class="row mt-2 justify-content-center">
+      <div class="col-4" id="burgerlist"> 
+        <ol id="list">
+            <li class="list">cheese burger <span class="pl-4"><button class="listbtn"> Devour it</button></span></li>
+            
+        </ol>
+      </div>
+      <div class="col-4" id="dbburgerlist"> 
+        
+    </div>
   </div>
   <div class="row justify-content-center mt-2">
     <div class="col-4 text-center">
@@ -45,12 +83,12 @@
             <div class="form-row justify-content-center ">
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control inputcol" placeholder="burger name">
+                        <input type="text" class="form-control inputcol"  id="name" placeholder="burger name">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-2">
-                        <button type="submit">Submit</button>
+                        <button id='submitBtn' onclick= "subFunc();" type="submit" >Submit</button>
                     </div>
                 </div>
 
@@ -60,7 +98,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-4">
-        <p class="text-center">Enter a burger you want to Eat Click the SUBMIT button</p>
+        <p class="text-centera">Enter a burger you want to Eat Click the SUBMIT button</p>
     </div>
   </div>
   

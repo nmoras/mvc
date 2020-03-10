@@ -1,0 +1,7 @@
+# schema.sql
+CREATE schema BURGER;
+use burger;
+CREATE TABLE EATBURGER (
+id INTEGER AUTO_INCREMENT PRIMARY KEY,
+name  VARCHAR (60) NOT NULL
+);
