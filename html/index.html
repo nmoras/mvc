@@ -30,30 +30,62 @@
             border-radius: 5px;
             
         }
+        #list{
+            list-style-type: none;
+        }
+        #burgerlist{
+            
+        }
     </style>
 </head>
 <body>
   <script>
-    $( document ).ready(function(event) {
+    $( document ).ready( async function() {
         console.log( "ready!" );
-        
+          
     });  
-        
+    let burgerName;        
     async function subFunc(){
         event.preventDefault();
         console.log('i am clicked')
-        const burgerName = document.querySelector('#name').value;
+        burgerName = $('#name').val();
         console.log(burgerName);  
-        let apiResult 
-        apiResult = $.post('api/result', burgerName);
-        console.log(apiResult);
-        apiResult = $.get('api/result/:')
-        $("#list").append(
-            `<li class="list mt-2">${burgerName}<span class="pl-4"><button class="listbtn"> Devour it</button></span></li>`
-        )
         
+        let burgerNameObj = {
+            name: burgerName
+        };
         
-};
+        let postBurger  = await $.post('/api/result', burgerNameObj);
+        console.log(postBurger);
+
+        let getBurger = await $.get('/api/getburger/');
+        console.log(getBurger);
+
+        $("#list").empty();
+        for( let i = 0; i < getBurger.length; i++){
+            $("#list").append(
+            `<li class="list mt-2"><span class="pr-2">${getBurger[i].id}.</span>${getBurger[i].name}<span class="pl-4"><button class="listbtn" onclick="getBurger(${getBurger[i].id})" ""id="burger${getBurger[i].id}" > Devour it</button></span></li>`);
+        }
+            
+    };
+
+        async function getBurger(idx){
+        event.preventDefault();
+        console.log('i am getBurgerFunction');
+        const burgerName = await $.get(`/api/result/${idx}`);  
+        console.log(`[POST dashboard info] recieved: `, burgerName);        
+        $('#burgerlist').append(`<li class="list mt-2">${burgerName[0].name}</li>`);
+    };
+    
+   
+//     async function thumbsupFunc(idx){
+//     const thumbsUp = await $.get(`/api/thumbsup/${idx}`);   
+//     console.log(thumbsUp);
+//     console.log(thumbsUp[0].thumbs_up); 
+//     // // event.preventDefault();
+//     // console.log(thumbsUp);
+//     $(`#number${idx}`).html(thumbsUp[0].thumbs_up);
+// }
     
   </script>  
   <div class="row mt-4 justify-content-center">
@@ -62,14 +94,17 @@
       </div>
   </div>
   <div class="row mt-2 justify-content-center">
-      <div class="col-4" id="burgerlist"> 
-        <ol id="list">
-            <li class="list">cheese burger <span class="pl-4"><button class="listbtn"> Devour it</button></span></li>
+      <div class="col-4"> 
+        <ul id="list">
             
-        </ol>
+            
+        </ul>
       </div>
-      <div class="col-4" id="dbburgerlist"> 
-        
+      <div class="col-4" > 
+        <ul id="burgerlist" >
+            
+            
+        </ul>
     </div>
   </div>
   <div class="row justify-content-center mt-2">

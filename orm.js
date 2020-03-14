@@ -33,14 +33,29 @@ const db = new Database({
     database: "burger"
 });
 
-async function saveResult(myPost){
-    const dbResult = await db.query(
-        "INSERT INTO eatburger(name) values(?)",[myPost.name]);
-        return dbResult;
+async function saveResultFn(myPost){
+    const dbResultPost = await db.query("INSERT INTO EATBURGER(name) values(?)",[myPost.name]);
+    // const dbResultGet = await db.query("SELECT EATBURGER.name FROM EATBURGER");
+    return dbResultPost;
 }
 
-async function displayResult(id){
-    const myListDb = await db.query("SELECT name FROM eatburger WHERE id = ?", [id]
-    );
+async function burgerDbFunc(id){
+    // console.log(burgername.name);
+    const myListDb = await db.query("SELECT name FROM eatburger WHERE id = ?", [id]);
+    // console.log(`[loadUser] thumbsupSql:`, myListDb);
     return myListDb;
+}
+
+async function getBurgerFunc(){
+    // console.log(burgername.name);
+    const getBurgerName = await db.query("SELECT * FROM eatburger");
+    // console.log(`[loadUser] getBurgerName:`, getBurgerName);
+    return getBurgerName;
+};
+
+module.exports = {
+    saveResultFn,
+    getBurgerFunc,
+    burgerDbFunc
+    
 }
