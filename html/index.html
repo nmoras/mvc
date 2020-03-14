@@ -12,18 +12,14 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <style>
         body{
-           background-color:olivedrab; 
+           background-color:orange; 
         }
         .imgburger{
-            height:100px;
-            margin-left:80px;
+            height:130px;
+            margin-left:120px;
             padding-left: 25px;
         }
-        .col-4{
-            border: 1px solid black;
-          
-        }
-        .inputcol{
+       .inputcol{
             width: 300px;
         }
         .listbtn{
@@ -34,7 +30,12 @@
             list-style-type: none;
         }
         #burgerlist{
-            
+            list-style-type: none;
+        }
+        .burgerlist{
+            border: 1px solid red;
+            background-color: white;
+            padding: 2px;
         }
     </style>
 </head>
@@ -44,10 +45,11 @@
         console.log( "ready!" );
           
     });  
-    let burgerName;        
-    async function subFunc(){
+       
+    async function subFunc(){   
         event.preventDefault();
         console.log('i am clicked')
+        
         burgerName = $('#name').val();
         console.log(burgerName);  
         
@@ -60,21 +62,21 @@
 
         let getBurger = await $.get('/api/getburger/');
         console.log(getBurger);
-
-        $("#list").empty();
+    
+        $("#list").html("");
         for( let i = 0; i < getBurger.length; i++){
             $("#list").append(
-            `<li class="list mt-2"><span class="pr-2">${getBurger[i].id}.</span>${getBurger[i].name}<span class="pl-4"><button class="listbtn" onclick="getBurger(${getBurger[i].id})" ""id="burger${getBurger[i].id}" > Devour it</button></span></li>`);
+            `<li class="list mt-2"><span class="pr-2">${getBurger[i].id}.</span>${getBurger[i].name}<span class="pl-4"><button class="listbtn pl-2" onclick="getBurger(${getBurger[i].id})" id="burger${getBurger[i].id}" > Devour it</button></span></li>`);
         }
             
     };
 
         async function getBurger(idx){
-        event.preventDefault();
-        console.log('i am getBurgerFunction');
-        const burgerName = await $.get(`/api/result/${idx}`);  
-        console.log(`[POST dashboard info] recieved: `, burgerName);        
-        $('#burgerlist').append(`<li class="list mt-2">${burgerName[0].name}</li>`);
+            event.preventDefault();
+            console.log('i am getBurgerFunction');
+            const burgerName = await $.get(`/api/result/${idx}`);  
+            console.log(`[POST dashboard info] recieved: `, burgerName);        
+            $('#burgerlist').append(`<li class="list burgerlist mt-2">${burgerName[0].name}</li>`);
     };
     
    
@@ -121,8 +123,8 @@
                         <input type="text" class="form-control inputcol"  id="name" placeholder="burger name">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 mt-2">
+                <div class="row pl-2">
+                    <div class="col-12 mt-2 pr-2">
                         <button id='submitBtn' onclick= "subFunc();" type="submit" >Submit</button>
                     </div>
                 </div>
