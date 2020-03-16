@@ -25,13 +25,27 @@ class Database {
     }
   }
 // at top INIT DB connection
-const db = new Database({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "root1234",
-    database: "burger"
-});
+// const db = new Database({
+//     host: "localhost",
+//     port: 3306,
+//     user: "root",
+//     password: "root1234",
+//     database: "burger"
+// });
+
+var db;
+if(process.env.JAWSDB_URL){
+     db = new Database(process.env.JAWSDB_URL);
+     console.log('jaws db is connected');
+}else{
+     db = new Database({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "root1234", //change 
+        database: "burger"
+    });
+};
 
 async function saveResultFn(myPost){
     const dbResultPost = await db.query("INSERT INTO EATBURGER(name) values(?)",[myPost.name]);
