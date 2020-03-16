@@ -66,7 +66,10 @@
         $("#list").html("");
         for( let i = 0; i < getBurger.length; i++){
             $("#list").append(
-            `<li class="list mt-2"><span class="pr-2">${getBurger[i].id}.</span>${getBurger[i].name}<span class="pl-4"><button class="listbtn pl-2" onclick="getBurger(${getBurger[i].id})" id="burger${getBurger[i].id}" > Devour it</button></span></li>`);
+            ` <div class="row justify-content-end">
+                <div class="col-4"><li><span class="pr-2">${getBurger[i].id}.</span>${getBurger[i].name}</li></div>
+                <div class="col-4"><button class="listbtn pl-2" onclick="getBurger(${getBurger[i].id})" id="burger${getBurger[i].id}">Devour it</button></div>
+            </div>`);
         }
             
     };
@@ -76,7 +79,10 @@
             console.log('i am getBurgerFunction');
             const burgerName = await $.get(`/api/result/${idx}`);  
             console.log(`[POST dashboard info] recieved: `, burgerName);        
-            $('#burgerlist').append(`<li class="list burgerlist mt-2">${burgerName[0].name}</li>`);
+            $('#burgerlist').append(
+                `<div class="row">
+                <div class="col-4"><li class="list burgerlist mt-2">${burgerName[0].name}</li></div>
+                </div>`);
     };
     
    
@@ -96,16 +102,14 @@
       </div>
   </div>
   <div class="row mt-2 justify-content-center">
-      <div class="col-4"> 
+      <div class="col-6"> 
         <ul id="list">
-            
-            
+           
         </ul>
       </div>
-      <div class="col-4" > 
-        <ul id="burgerlist" >
-            
-            
+      <div class="col-6" > 
+        <ul id="burgerlist" >  
+                 
         </ul>
     </div>
   </div>
