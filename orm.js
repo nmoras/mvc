@@ -55,7 +55,7 @@ async function saveResultFn(myPost){
 
 async function burgerDbFunc(id){
     // console.log(burgername.name);
-    const myListDb = await db.query("SELECT name FROM eatburger WHERE id = ?", [id]);
+    const myListDb = await db.query("SELECT * FROM eatburger WHERE id = ?", [id]);
     // console.log(`[loadUser] thumbsupSql:`, myListDb);
     return myListDb;
 }

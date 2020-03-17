@@ -81,7 +81,7 @@
             console.log(`[POST dashboard info] recieved: `, burgerName);        
             $('#burgerlist').append(
                 `<div class="row">
-                <div class="col-4"><li class="list burgerlist mt-2">${burgerName[0].name}</li></div>
+                <div class="col-6"><li class="list burgerlist mt-2"><span class="pr-2">${burgerName[0].id}.</span>${burgerName[0].name}</li></div>
                 </div>`);
     };
     
