@@ -12,4 +12,7 @@ The app will store every burger in a database, whether devoured or not.
   4. JavaScript
   5. Bootstrap
   
+ ## Deployed URL
+ https://eatdaburger-api.herokuapp.com/
+  
  ![MVC](https://github.com/nmoras/mvc/blob/master/assets/screenshot.PNG) 
